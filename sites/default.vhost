@@ -1,0 +1,50 @@
+% ==========================================================================================================
+% BISBINO VHOST default 
+%
+% Copyright (C) 2010, Roberto Ostinelli <roberto@ostinelli.net>
+% All rights reserved.
+% ==========================================================================================================
+
+% server name
+{name, "localhost"}.
+
+% server admin email
+{admin_email, "admin@localhost"}.
+
+% directory index
+{directory_index, "index.php"}.
+
+% rewrite rules
+%  note that erlang already gives a special meaning to \ in literal strings, so single \ has to be written as "\\"
+%  for instance, the regex \w, matching [a-zA-Z], must be written as \\w in these expressions.
+%  the regex format is:
+%    {Find, Replace, [Options]}
+%    Options = [option()]
+%    option() = stop
+%      stop: if matched, do not proceed with successive rewrite rules
+%  example of a regex:
+%    {"/user/(\\w+)/?", "/index.php?user=\\1", [stop]}
+{rewrite_rules, []}.
+
+% serve static files [true | false]
+{serve_static_files, true}.
+% if serve_static_files =:= true, files will be served from this directory
+{static_files_document_root, "/Users/roberto/code/bisbino/htdocs"}.
+
+% fastcgi servers
+{fastcgi_servers, [
+	{"localhost", [
+		% fastcgi server port
+		{port, 9000},
+		% extensions supported by fastcgi
+		{extensions, [".php"]},
+		% document root of fastcgi
+		{document_root, "/Users/roberto/code/bisbino/htdocs"},
+		% connection timeout to the fastcgi backend [ms]
+		{connect_timeout, 10000},
+		% if no connection can be established, retry after specified time [ms]
+		{connect_retry_after, 10000},
+		% response timeout from the fastcgi backend [ms]
+		{response_timeout, 10000}
+	]}
+]}.

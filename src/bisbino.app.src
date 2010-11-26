@@ -1,0 +1,27 @@
+{application, bisbino,
+[
+	{description, "HTTP server with FastCgi backends"},
+	{vsn, "0.1-dev"},
+	{modules, [
+		bisbino,
+		bisbino_app,
+		bisbino_fcgi_connection,
+		bisbino_fcgi_manager,
+		bisbino_fcgi_protocol,
+		bisbino_http,
+		bisbino_sup,
+		bisbino_utility,
+		misultin,
+		misultin_req,
+		misultin_socket,
+		misultin_http,
+		misultin_utility,
+		misultin_websocket,
+		misultin_ws
+	]},
+	{registered, [bisbino, misultin]},
+	{env, []},
+	{applications, [kernel, stdlib]},
+	{mod, {bisbino_app, []}},
+	{start_phases, []}
+]}.
